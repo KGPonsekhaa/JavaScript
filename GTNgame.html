@@ -1,0 +1,39 @@
+<h1>Guess The Number</h1>
+<input id="guessnumber" type="number" />
+<button id="checkButton" onclick="check()">Check</button>
+<p id="result">You are Right/Wrong</p>
+<p id="score">Score: 10</p>
+
+<script>
+  // Selecting input box, paragraph, and button
+  var guessnumber = document.getElementById("guessnumber");
+  var result = document.getElementById("result");
+  var score = document.getElementById("score");
+  var checkButton = document.getElementById("checkButton");
+  var randomnumber = Math.floor(Math.random() * 10) + 1;
+  var totalscore = 10;
+
+  function check() {
+    var enterednumber = parseInt(guessnumber.value); // Convert input to integer
+
+    if (randomnumber === enterednumber) {
+      result.textContent = "Right";
+      alert("You Won...");
+      disableGame();
+    } else {
+      totalscore -= 1;
+      score.textContent = "Score: " + totalscore;
+      result.textContent = "Wrong";
+
+      if (totalscore === 0) {
+        alert("Game Over. You've run out of points.");
+        disableGame();
+      }
+    }
+  }
+
+  function disableGame() {
+    guessnumber.disabled = true;
+    checkButton.disabled = true;
+  }
+</script>

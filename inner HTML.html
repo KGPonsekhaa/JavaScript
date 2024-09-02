@@ -1,0 +1,41 @@
+<div class="one">Hello</div>
+
+<script>
+  //var div = document.getElementById("one");
+  //var div = document.querySelector("h1");
+
+  var div = document.querySelector(".one");
+
+  div.innerHTML = "<h1>Bye</h1>";
+  console.log(div.innerHTML);
+</script>
+
+<!-- 
+<h1 class="ok">One</h1>
+<h1 class="ok">Two</h1>
+<h1 class="ok">Three</h1>
+
+<script>
+  var div = document.querySelectorAll(".ok");
+  for (count = 0; count < div.length; count = count + 1) {
+    console.log(div[count].textContent);
+  }
+</script> -->
+
+<!-- //  append //prepend -//for beforebegin,beforeend,afterend,afterbegin -->
+<!-- <div>
+  <h1>Jai</h1>
+  <h1>Ponsekha</h1>
+</div>
+<script>
+  //select div
+  var div = document.querySelector("div");
+
+  // append //prepend
+  //div.prepend("Hello");
+  //div.append("Hello");
+
+  var h1 = document.createElement("h1");
+  h1.textContent = "Hello ";
+  div.insertAdjacentElement("afterbegin", h1);
+</script> -->

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Student Form</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background-color: #f4f4f4;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    #student-details {
+      border: 1px;
+      padding: 10px;
+    }
+
+    #table1 {
+      border: 1px;
+      padding: 10px;
+    }
+
+    button {
+      background-color: #87ceeb;
+      /* Sky blue color */
+      color: black;
+      border-color: black;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      font-size: 15px;
+    }
+    button:hover {
+      background-color: #b0e0e6;
+    }
+
+    #table1 td {
+      padding: 3px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+      /* Make labels bold */
+    }
+
+    td input[type="text"],
+    td input[type="number"],
+    td select {
+      text-align: left;
+      /* Ensure input text is aligned left */
+      font-weight: normal;
+      /* Normal font weight for input text */
+    }
+
+    input[type="radio"] {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    /* Set font-weight to normal for radio labels */
+    td input[type="radio"] + label {
+      font-weight: normal;
+    }
+
+    /* Change color when radio button is checked */
+    input[type="radio"]:checked {
+      accent-color: #007bff;
+      /* Blue color for checked radio button */
+    }
+
+    #table2 thead td {
+      font-weight: bold;
+    }
+
+    /* Regular row styles */
+    #table2 tbody td {
+      font-weight: normal;
+      /* Set font-weight to normal for other rows */
+    }
+
+    #table2 button {
+      background-color: #dc3545;
+      /* Red color for delete button */
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #table2 button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="student-details">
+    <center>
+      <h1>Student Form</h1>
+      <div id="table1">
+        <table border="1" style="padding: 5px">
+          <tr>
+            <td>Name</td>
+            <td><input type="text" id="name" /></td>
+          </tr>
+          <tr>
+            <td>Age</td>
+            <td><input type="number" id="age" /></td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>
+              <input type="radio" name="gender" id="male" value="Male" />
+              <label for="male">Male</label>
+              <input type="radio" name="gender" id="female" value="Female" />
+              <label for="female">Female</label>
+            </td>
+          </tr>
+          <tr>
+            <td>Course</td>
+            <td>
+              <select id="course">
+                <option>Full stack Development</option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>Data analyst</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td><input type="text" id="email" /></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button onclick="save()">Save</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="table2">
+        <table border="1">
+          <thead>
+            <tr>
+              <td>NAME</td>
+              <td>AGE</td>
+              <td>COURSE</td>
+              <td>GENDER</td>
+              <td>EMAIL</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </center>
+  </div>
+</body>
+
+<script>
+  function save() {
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("age").value;
+    var gender =
+      document.querySelector('input[name="gender"]:checked')?.value ||
+      "Not specified";
+    var course = document.getElementById("course").value;
+    var email = document.getElementById("email").value;
+
+    // Create a new row in table2
+    var table2 = document.querySelector("#table2 tbody");
+    var row = table2.insertRow();
+    row.insertCell(0).textContent = name;
+    row.insertCell(1).textContent = age;
+    row.insertCell(2).textContent = course;
+    row.insertCell(3).textContent = gender;
+    row.insertCell(4).textContent = email;
+    var actionCell = row.insertCell(5);
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.onclick = deleteItem;
+    actionCell.appendChild(deleteButton);
+
+    // Clear the form fields after saving
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("male").checked = false;
+    document.getElementById("female").checked = false;
+    document.getElementById("course").selectedIndex = 0;
+    document.getElementById("email").value = "";
+
+    // Optionally, you can add a message indicating the save was successful
+    //document.getElementById("status").textContent = "Student Details Saved!";
+  }
+
+  function deleteItem(event) {
+    var button = event.target;
+    var row = button.closest("tr");
+    row.remove();
+  }
+</script>
